@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <time.h>
-
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 
@@ -9,19 +8,12 @@ hd44780_I2Cexp lcd;
 
 #define LDR_PIN 34
 
-// ==========================
-// WiFi Credentials
-// ==========================
 const char* ssid     = "xxxxxxxx";
 const char* password = "yyyyyyyy";
 
-// Nigeria Time Zone (UTC+1)
 const long gmtOffset_sec = 3600;
 const int daylightOffset_sec = 0;
 
-// ==========================
-// Screen Timing
-// ==========================
 const unsigned long LUX_SCREEN_TIME  = 6000;
 const unsigned long TIME_SCREEN_TIME = 500;
 float filteredADC = 0;
@@ -29,9 +21,6 @@ float filteredADC = 0;
 bool showLux = true;
 unsigned long lastScreenSwitch = 0;
 
-// ==========================
-// Sun Icon
-// ==========================
 byte sunIcon[8] =
 {
     B00100,
@@ -44,9 +33,6 @@ byte sunIcon[8] =
     B00000
 };
 
-// ==========================
-// NTP Sync
-// ==========================
 void syncTime()
 {
     lcd.clear();
@@ -87,9 +73,6 @@ void syncTime()
     WiFi.mode(WIFI_OFF);
 }
 
-// ==========================
-// Setup
-// ==========================
 void setup()
 {
     Serial.begin(115200);
@@ -113,9 +96,6 @@ void setup()
     lcd.clear();
 }
 
-// ==========================
-// Main Loop
-// ==========================
 void loop()
 {
     // Average 20 samples
